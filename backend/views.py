@@ -3,6 +3,7 @@ from .utils import json_response
 from .models import UserData
 
 from .serializers import ChartDataSerializer
+from rest_framework.generics import get_object_or_404
 
 
 class ChartData(APIView):
@@ -34,6 +35,12 @@ class ChartData(APIView):
             }
             response.append(dic)
         return json_response(True, data=response)
+
+    def delete(self, request):
+        user_id = int(request.query_params["id"])
+        user_data = get_object_or_404(UserData, id=user_id)
+        user_data.delete()
+        return json_response(True, message='Data is deleted')
 
 
 class FetchData(APIView):
