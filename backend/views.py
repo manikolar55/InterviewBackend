@@ -7,6 +7,11 @@ from rest_framework.generics import get_object_or_404
 
 
 class ChartData(APIView):
+    """
+    In  this class we can recieved the user data and store in table in post function call
+    and send all the data to frontend in get function call
+    delete function recieved the id and delete the data of this id
+    """
     def post(self, request):
         data = request.data
         serializer = ChartDataSerializer(data=request.data)
@@ -44,6 +49,10 @@ class ChartData(APIView):
 
 
 class FetchData(APIView):
+    """
+    In this class the get function recieved the id and send it according to id
+    the put function recieved all user data for update the information.
+    """
     def get(self, request):
         response = []
         user_id = int(request.query_params["id"])
